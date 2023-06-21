@@ -9,7 +9,7 @@ class Routing extends Component {
             <div>
                 <Routes>
                     <Route exact path='/' element={<Homepage></Homepage>}></Route>
-                    <Route exact path='/creatorder' element={<Createorder></Createorder>}></Route>
+                    <Route exact path='/createorder' element={<Createorder></Createorder>}></Route>
                     {/* <Route exact path='/login' element={<Login></Login>}></Route> */}
                 </Routes>
             </div>
