@@ -131,8 +131,6 @@ const LengthInput = ({ value = {}, onChange }) => {
 
 
 function PackageForm({onFinish, initialValues}){
-    
-
     const validateMessages = { 
         required: '${label} is required!'
     };

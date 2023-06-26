@@ -3,18 +3,11 @@ import "./Createorder.css";
 import UserinfoForm from "./form/UserinfoForm"
 import DestinationForm from './form/DestinationForm';
 import PackageForm from './form/PackageForm';
-// PackageForm.js
-import { 
-    Button,
-    
-    Steps
-   } from 'antd';
-
-
-
+import ChoosePlanForm from './form/ChoosePlanForm';
+import PaymentForm from './form/PaymentForm';
+import {Steps} from 'antd';
 
 function Createorder(){
-    // const [form] = Form.useForm();
     const [current,setCurrent] = useState(0);
     const [userInfo,setUserInfo] = useState(null); 
     const [reciverInfo,setReciverInfo] = useState(null); 
@@ -45,8 +38,8 @@ function Createorder(){
         <UserinfoForm onFinish={onFinshUserform} initialValues={userInfo} />,
         <DestinationForm onFinish={onFinshDestinationform}  initialValues={reciverInfo}/>,
         <PackageForm onFinish={onFinshPackageform}  initialValues={packageinfo} />,
-        <ChoosePlan onFinish={onFinshPlanform} initialValues={planinfo}/>,
-        <Payment/>,
+        <ChoosePlanForm onFinish={onFinshPlanform} initialValues={planinfo}/>,
+        <PaymentForm/>,
     ]
     const isStepdisable=(stepNumber)=>{
         if(stepNumber===0){
@@ -89,33 +82,13 @@ function Createorder(){
                 title: 'Choose your plan'},
                 {
                 disabled: isStepdisable(4),
-                title: '{Pay}'},
+                title: 'Pay'},
             ]}
             />
             {forms[current]}
         </>
         
         
-    )
-}
-
-
-function ChoosePlan({onFinish,initialValues}){
-    
-    return(
-        <div>
-            
-            <Button type="primary" htmlType="submit" onClick={onFinish} initialValues={initialValues}>
-                Continue
-            </Button>
-        </div>
-    )
-}
-function Payment(){
-    return(
-        <Button type="primary" htmlType="submit">
-            Pay
-        </Button>
     )
 }
 
