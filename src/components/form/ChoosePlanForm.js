@@ -1,33 +1,13 @@
-import React,{useState} from "react";
-import TemplateCard from "../Card/TemplateCard";
+import React,{ useEffect }  from "react";
+import Card from "../Card/Card";
 import { Button} from 'antd';
-// import drone from '../assets/drone.png';
-
+import './ChoosePlanForm.css';
 
 //src\components\form\ChoosePlanForm.js
 //src\assets\drone.png
-function ChoosePlanForm({onFinish,initialValues}) {
-    const [selectedCard, setSelectedCard] = useState(null); // 添加状态来存储选择的卡片
+function ChoosePlanForm({onFinish,selectedCard,onCardSelect}) {
     const handleCardSelect = (card) => {
-        setSelectedCard(card);
-    
-        // 发送选择的卡片信息到后端
-        // 可以在此处编写代码将 selectedCard 发送到后端
-        // 例如使用 fetch 或 axios 发送 POST 请求
-        // fetch('/api/select-card', {
-        //   method: 'POST',
-        //   body: JSON.stringify(selectedCard),
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        // })
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     // 处理后端的响应数据
-        //   })
-        //   .catch(error => {
-        //     // 处理错误
-        //   });
+        onCardSelect(card);
       };
     // fake data
     const cardList = [
@@ -35,18 +15,38 @@ function ChoosePlanForm({onFinish,initialValues}) {
         { id: 2, title: 'Plan 2', type: 'Human', price: '$20', image: process.env.PUBLIC_URL +'/images/human.jpg' },
         { id: 3, title: 'Plan 3', type: 'Drone', price: '$30', image: process.env.PUBLIC_URL + '/images/drone.png' },
       ];
+    useEffect(() => {
+    // Set the default selected card
+        if (!selectedCard && cardList.length > 0) {
+            handleCardSelect(cardList[0]);
+        }
+    }, []);
     return(
-        <div>
+        <div > 
             <h1>Hi Here is TemplateCard</h1>
-            <TemplateCard cardList={cardList} onCardSelect={handleCardSelect} /> 
-        
-            {selectedCard && (
-                <div>
-                <h3>Selected Card:</h3>
-                <p>{selectedCard.title}</p>
+            <div className="card-list">
+                {cardList.map((card) => (
+                    <Card
+                    key={card.id}
+                    title={card.title}
+                    type={card.type}
+                    price={card.price}
+                    image={card.image}
+                    onSelect={() => handleCardSelect(card)}
+                    />
+                ))}
+                <div className="cardselection">
+                    {selectedCard && (
+                        <div>
+                        <h3>Selected Plan for Delivery:</h3>
+                        <p>{selectedCard.title}</p>
+                        <p>{selectedCard.price}</p>
+                        </div>
+                    )}
                 </div>
-            )}
-            <Button type="primary" htmlType="submit" onClick={onFinish} >
+                
+            </div>
+            <Button className="Planbutton" type="primary" htmlType="submit" onClick={() => onFinish(selectedCard)}  >
                 Continue
             </Button>
         </div>

@@ -19,3 +19,16 @@
     height: auto;
     margin-bottom: 10px;
   }
+  .cardselection{
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+  .Planbutton{
+    padding: 10px;
+    display: block;
+    margin: auto;
+    width: 40%;
+  }

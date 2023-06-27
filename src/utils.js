@@ -1,8 +1,5 @@
 const SERVER_ORIGIN = '';
-
-
 const loginUrl = `${SERVER_ORIGIN}/login`;
-
 
 export const login = (credential) => {
   const formData = new FormData();
@@ -53,6 +50,8 @@ export const logout = () => {
     }
   })
 }
+
+
 
 
 
