@@ -5,16 +5,11 @@ import './ChoosePlanForm.css';
 
 //src\components\form\ChoosePlanForm.js
 //src\assets\drone.png
-function ChoosePlanForm({onFinish,selectedCard,onCardSelect}) {
+function ChoosePlanForm({onFinish,selectedCard,onCardSelect,cardList}) {
     const handleCardSelect = (card) => {
-        onCardSelect(card);
+        onCardSelect(card.id);
       };
-    // fake data
-    const cardList = [
-        { id: 1, title: 'Plan 1', type: 'Robot', price: '$10', image: process.env.PUBLIC_URL +'/images/robot.png' },
-        { id: 2, title: 'Plan 2', type: 'Human', price: '$20', image: process.env.PUBLIC_URL +'/images/human.jpg' },
-        { id: 3, title: 'Plan 3', type: 'Drone', price: '$30', image: process.env.PUBLIC_URL + '/images/drone.png' },
-      ];
+    
     useEffect(() => {
     // Set the default selected card
         if (!selectedCard && cardList.length > 0) {
@@ -23,7 +18,6 @@ function ChoosePlanForm({onFinish,selectedCard,onCardSelect}) {
     }, []);
     return(
         <div > 
-            <h1>Hi Here is TemplateCard</h1>
             <div className="card-list">
                 {cardList.map((card) => (
                     <Card
@@ -33,14 +27,15 @@ function ChoosePlanForm({onFinish,selectedCard,onCardSelect}) {
                     price={card.price}
                     image={card.image}
                     onSelect={() => handleCardSelect(card)}
+                    isSelected={selectedCard === card.id}
                     />
                 ))}
                 <div className="cardselection">
                     {selectedCard && (
                         <div>
-                        <h3>Selected Plan for Delivery:</h3>
-                        <p>{selectedCard.title}</p>
-                        <p>{selectedCard.price}</p>
+                            <h3>Selected Plan for Delivery:</h3>
+                            <p>{cardList.find(card => card.id === selectedCard).title}</p>
+                            <p>{cardList.find(card => card.id === selectedCard).price}</p>
                         </div>
                     )}
                 </div>

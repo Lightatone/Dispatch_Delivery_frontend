@@ -94,11 +94,12 @@ function Createorder() {
   const onFinshPlanform = (values) => {
     setCurrent(4);
     setSelectedCard(selectedCard);
-    console.log("Plan info from Card: ", values);
+    const finalplan = cardList.find(card => card.id === values);
+    console.log("Plan info from Card: ", finalplan);
     /*
     fetch('/api/plan-info', {
       method: 'POST',
-      body: JSON.stringify(values),
+      body: JSON.stringify(finalplan),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -107,14 +108,20 @@ function Createorder() {
       .then((data) => {
         // Process the response from the backend
         setCurrent(4);
-        setSelectedCard(values);
-        console.log('Plan info from Card: ', values);
+        setSelectedCard(finalplan);
+        console.log('Plan info from Card: ', finalplan);
       })
       .catch((error) => {
         // Handle errors
       });
     */
   };
+  // fake data
+  const cardList = [
+    { id: 1, title: 'Plan 1', type: 'Robot', price: '$10', image: process.env.PUBLIC_URL +'/images/robot.png' },
+    { id: 2, title: 'Plan 2', type: 'Human', price: '$20', image: process.env.PUBLIC_URL +'/images/human.jpg' },
+    { id: 3, title: 'Plan 3', type: 'Drone', price: '$30', image: process.env.PUBLIC_URL + '/images/drone.png' },
+  ];
   const forms = [
     <UserinfoForm onFinish={onFinshUserform} initialValues={userInfo} />,
     <DestinationForm
@@ -124,12 +131,13 @@ function Createorder() {
     <PackageForm onFinish={onFinshPackageform} initialValues={packageinfo} />,
     <ChoosePlanForm
       onFinish={onFinshPlanform}
-      initialValues={selectedCard}
       selectedCard={selectedCard}
       onCardSelect={setSelectedCard}
+      cardList={cardList}
     />,
     <PaymentForm />,
   ];
+
   const isStepdisable = (stepNumber) => {
     if (stepNumber === 0) {
       return false;

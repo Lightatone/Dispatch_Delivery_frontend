@@ -1,15 +1,19 @@
 .cardstyle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32%;
+  border: 2px solid #000000;
+  padding: 10px;
+  margin: 10px;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.selected {
+  border-color: #ff0000; /* 设置选中状态下的边框颜色 */
+}

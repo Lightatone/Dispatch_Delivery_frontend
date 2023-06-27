@@ -1,8 +1,10 @@
 import React from 'react';
 import './Card.css'
-const Card = ({ title, type, price, image, onSelect }) => {
+const Card = ({ title, type, price, image, onSelect,isSelected  }) => {
+  
+
     return (
-        <div className="cardstyle">
+        <div className={`cardstyle ${isSelected ? 'selected' : ''}`}>
           <img className="card-image" src={image} alt={title} />
           <div className="card-details">
             <h3>{title}</h3>
